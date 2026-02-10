@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Chat</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+    h1 { text-align: center; margin-bottom: 30px; }
+    #chat { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; height: 400px; overflow-y: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .message { padding: 10px 15px; border-radius: 20px; margin: 5px 0; max-width: 80%; }
+    .user { background: #007BFF; color: white; margin-left: auto; text-align: right; }
+    .ai { background: #e9ecef; color: #333; text-align: left; }
+    .question-btn {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    .question-btn:hover { background-color: #1e7e34; }
+    #questions { text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<h1>Headphones Support</h1>
+
+<div id="chat"></div>
+
+<div id="questions">
+  <button class="question-btn" onclick="sendMessage('What is the price?')">What is the price?</button>
+  <button class="question-btn" onclick="sendMessage('How long is the battery life?')">How long is the battery life?</button>
+  <button class="question-btn" onclick="sendMessage('Is it Bluetooth compatible?')">Is it Bluetooth compatible?</button>
+  <button class="question-btn" onclick="sendMessage('What about delivery?')">What about delivery?</button>
+</div>
+
+<script>
+// Knowledge base for demo
+const knowledgeBase = {
+  "What is the price?": "The Wireless Headphones cost Rs. 4,999.",
+  "How long is the battery life?": "The battery lasts up to 20 hours.",
+  "Is it Bluetooth compatible?": "Yes, it is fully Bluetooth compatible.",
+  "What about delivery?": "Delivery takes 2-4 working days nationwide."
+};
+
+const chat = document.getElementById("chat");
+
+function sendMessage(question) {
+  // Show user message
+  chat.innerHTML += `<div class="message user">${question}</div>`;
+  
+  // Scroll to bottom
+  chat.scrollTop = chat.scrollHeight;
+  
+  // AI response
+  const answer = knowledgeBase[question] || "Sorry, I don't have information on that.";
+  
+  setTimeout(() => {
+    chat.innerHTML += `<div class="message ai">${answer}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+  }, 500); // small delay for realism
+}
+</script>
+
+</body>
+</html>
