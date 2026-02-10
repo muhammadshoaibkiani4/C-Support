@@ -1,16 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Product Chat</title>
+  <meta charset="UTF-8">
+  <title>Headphones Support</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body { font-family: Arial; padding: 20px; background: #f5f5f5; }
-    h1 { text-align: center; margin-bottom: 30px; }
-    #chat { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; height: 400px; overflow-y: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    .message { padding: 10px 15px; border-radius: 20px; margin: 5px 0; max-width: 80%; }
-    .user { background: #007BFF; color: white; margin-left: auto; text-align: right; }
-    .ai { background: #e9ecef; color: #333; text-align: left; }
+    /* Body and background */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    /* Chat container */
+    #chat {
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      height: 450px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    /* Chat messages */
+    .message {
+      padding: 12px 20px;
+      border-radius: 25px;
+      margin: 5px 0;
+      max-width: 80%;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.4s forwards;
+    }
+
+    .user {
+      background: #007BFF;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .ai {
+      background: #E9ECEF;
+      color: #333;
+      text-align: left;
+    }
+
+    /* Buttons for questions */
+    #questions {
+      text-align: center;
+    }
+
     .question-btn {
-      padding: 10px 20px;
+      padding: 12px 20px;
       margin: 5px;
       font-size: 16px;
       cursor: pointer;
@@ -18,9 +72,20 @@
       color: white;
       border: none;
       border-radius: 8px;
+      transition: background 0.2s;
     }
-    .question-btn:hover { background-color: #1e7e34; }
-    #questions { text-align: center; margin-top: 20px; }
+
+    .question-btn:hover {
+      background-color: #1e7e34;
+    }
+
+    /* Typing animation keyframe */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -36,33 +101,6 @@
   <button class="question-btn" onclick="sendMessage('What about delivery?')">What about delivery?</button>
 </div>
 
-<script>
-// Knowledge base for demo
-const knowledgeBase = {
-  "What is the price?": "The Wireless Headphones cost Rs. 4,999.",
-  "How long is the battery life?": "The battery lasts up to 20 hours.",
-  "Is it Bluetooth compatible?": "Yes, it is fully Bluetooth compatible.",
-  "What about delivery?": "Delivery takes 2-4 working days nationwide."
-};
-
-const chat = document.getElementById("chat");
-
-function sendMessage(question) {
-  // Show user message
-  chat.innerHTML += `<div class="message user">${question}</div>`;
-  
-  // Scroll to bottom
-  chat.scrollTop = chat.scrollHeight;
-  
-  // AI response
-  const answer = knowledgeBase[question] || "Sorry, I don't have information on that.";
-  
-  setTimeout(() => {
-    chat.innerHTML += `<div class="message ai">${answer}</div>`;
-    chat.scrollTop = chat.scrollHeight;
-  }, 500); // small delay for realism
-}
-</script>
-
+<script src="ai.js"></script>
 </body>
 </html>
