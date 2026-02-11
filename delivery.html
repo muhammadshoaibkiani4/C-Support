@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delivery Help</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Delivery Support</h1>
+
+<div class="glass">
+  <button class="btn" onclick="showAnswer('time')">Delivery Time</button>
+  <button class="btn" onclick="showAnswer('nationwide')">Nationwide Delivery</button>
+  <button class="btn" onclick="showAnswer('tracking')">Order Tracking</button>
+  <p id="answer"></p>
+  <br>
+  <button class="btn" onclick="location.href='index.html'">⬅ Back</button>
+</div>
+
+<script>
+function showAnswer(type) {
+  const answers = {
+    time: "Delivery takes 2-4 working days.",
+    nationwide: "Yes, we deliver nationwide.",
+    tracking: "You will receive a tracking number via SMS."
+  };
+  document.getElementById("answer").innerText = answers[type];
+}
+</script>
+
+</body>
+</html>
