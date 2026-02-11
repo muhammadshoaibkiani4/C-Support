@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product Support</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#chat {
+  width: 100%;
+  max-width: 650px;
+  height: 420px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.message {
+  padding: 10px 16px;
+  border-radius: 20px;
+  margin: 6px 0;
+  max-width: 75%;
+}
+
+.user {
+  background: #00c6ff;
+  margin-left: auto;
+  box-shadow: 0 0 10px #00c6ff;
+}
+
+.ai {
+  background: rgba(255,255,255,0.2);
+}
+</style>
+</head>
+<body>
+
+<h1 id="productTitle"></h1>
+
+<div id="chat" class="glass"></div>
+<div id="questions"></div>
+
+<br>
+<button class="btn" onclick="location.href='products.html'">⬅ Back to Products</button>
+
+<script src="ai.js"></script>
+
+</body>
+</html>
