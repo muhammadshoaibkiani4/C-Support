@@ -1,106 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Headphones Support</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Body and background */
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #74ABE2, #5563DE);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<title>AI Customer Support</title>
 
-    h1 {
-      color: white;
-      margin-bottom: 20px;
-    }
+<style>
 
-    /* Chat container */
-    #chat {
-      max-width: 600px;
-      width: 100%;
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      height: 450px;
-      overflow-y: auto;
-      margin-bottom: 20px;
-    }
+/* ===== BACKGROUND ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #1f1c2c, #928dab, #5563DE, #74ABE2);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  min-height: 100vh;
+  color: white;
+}
 
-    /* Chat messages */
-    .message {
-      padding: 12px 20px;
-      border-radius: 25px;
-      margin: 5px 0;
-      max-width: 80%;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.4s forwards;
-    }
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
 
-    .user {
-      background: #007BFF;
-      color: white;
-      margin-left: auto;
-      text-align: right;
-    }
+/* ===== TITLE ===== */
+h1 {
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
 
-    .ai {
-      background: #E9ECEF;
-      color: #333;
-      text-align: left;
-    }
+/* ===== CHAT BOX ===== */
+#chat {
+  width: 100%;
+  max-width: 650px;
+  height: 450px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+}
 
-    /* Buttons for questions */
-    #questions {
-      text-align: center;
-    }
+/* ===== MESSAGES ===== */
+.message {
+  padding: 12px 18px;
+  border-radius: 20px;
+  margin: 8px 0;
+  max-width: 75%;
+  animation: fadeIn 0.4s ease forwards;
+  opacity: 0;
+}
 
-    .question-btn {
-      padding: 12px 20px;
-      margin: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
+.user {
+  background: #00c6ff;
+  color: white;
+  margin-left: auto;
+  box-shadow: 0 0 12px #00c6ff;
+}
 
-    .question-btn:hover {
-      background-color: #1e7e34;
-    }
+.ai {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  box-shadow: 0 0 12px rgba(255,255,255,0.3);
+}
 
-    /* Typing animation keyframe */
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== BUTTONS ===== */
+#questions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.question-btn {
+  padding: 10px 18px;
+  margin: 6px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #00c6ff;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #00c6ff;
+}
+
+.question-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00c6ff;
+}
+
+/* ===== Typing Dots ===== */
+.typing {
+  display: inline-block;
+}
+
+.typing span {
+  height: 8px;
+  width: 8px;
+  background: white;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 2px;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing span:nth-child(2) { animation-delay: .2s; }
+.typing span:nth-child(3) { animation-delay: .4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+</style>
 </head>
 <body>
 
-<h1>Headphones Support</h1>
+<h1>AI Customer Support</h1>
 
 <div id="chat"></div>
 
 <div id="questions">
-  <button class="question-btn" onclick="sendMessage('What is the price?')">What is the price?</button>
-  <button class="question-btn" onclick="sendMessage('How long is the battery life?')">How long is the battery life?</button>
-  <button class="question-btn" onclick="sendMessage('Is it Bluetooth compatible?')">Is it Bluetooth compatible?</button>
-  <button class="question-btn" onclick="sendMessage('What about delivery?')">What about delivery?</button>
+  <button class="question-btn" onclick="sendMessage('What is the price?')">Price</button>
+  <button class="question-btn" onclick="sendMessage('Battery life?')">Battery</button>
+  <button class="question-btn" onclick="sendMessage('Is it waterproof?')">Waterproof</button>
+  <button class="question-btn" onclick="sendMessage('Is it Bluetooth 5.0?')">Bluetooth</button>
+  <button class="question-btn" onclick="sendMessage('Warranty details?')">Warranty</button>
+  <button class="question-btn" onclick="sendMessage('Delivery time?')">Delivery</button>
 </div>
 
 <script src="ai.js"></script>
+
 </body>
 </html>
