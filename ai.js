@@ -1,31 +1,44 @@
 const chat = document.getElementById("chat");
 
-// Knowledge base (demo answers)
 const knowledgeBase = {
   "What is the price?": "The Wireless Headphones cost Rs. 4,999.",
-  "How long is the battery life?": "The battery lasts up to 20 hours.",
-  "Is it Bluetooth compatible?": "Yes, it is fully Bluetooth compatible.",
-  "What about delivery?": "Delivery takes 2-4 working days nationwide."
+  "Battery life?": "Battery lasts up to 20 hours on a single charge.",
+  "Is it waterproof?": "Yes, it has IPX5 water resistance.",
+  "Is it Bluetooth 5.0?": "Yes, it supports Bluetooth 5.0 for faster connectivity.",
+  "Warranty details?": "It comes with a 1-year official warranty.",
+  "Delivery time?": "Delivery takes 2-4 working days nationwide."
 };
 
 function sendMessage(question) {
-  // Show user message
-  const userMsg = document.createElement("div");
-  userMsg.className = "message user";
-  userMsg.textContent = question;
-  chat.appendChild(userMsg);
-  chat.scrollTop = chat.scrollHeight;
 
-  // Show typing bubble
-  const typingMsg = document.createElement("div");
-  typingMsg.className = "message ai";
-  typingMsg.textContent = "AI is typing...";
-  chat.appendChild(typingMsg);
-  chat.scrollTop = chat.scrollHeight;
+  addMessage(question, "user");
 
-  // Replace typing bubble with answer after delay
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "message ai";
+  typingDiv.innerHTML = `
+    <div class="typing">
+      <span></span><span></span><span></span>
+    </div>
+  `;
+  chat.appendChild(typingDiv);
+  scrollChat();
+
   setTimeout(() => {
-    typingMsg.textContent = knowledgeBase[question] || "Sorry, I don't have information on that.";
-    chat.scrollTop = chat.scrollHeight;
-  }, 1000 + Math.random()*1000); // random delay 1-2s for realism
+    typingDiv.remove();
+    addMessage(knowledgeBase[question] || 
+      "I am still learning about this product. Please contact live support for more help.", 
+      "ai");
+  }, 1500 + Math.random() * 1000);
+}
+
+function addMessage(text, type) {
+  const msg = document.createElement("div");
+  msg.className = "message " + type;
+  msg.textContent = text;
+  chat.appendChild(msg);
+  scrollChat();
+}
+
+function scrollChat() {
+  chat.scrollTop = chat.scrollHeight;
 }
